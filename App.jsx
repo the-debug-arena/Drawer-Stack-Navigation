@@ -11,6 +11,10 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import Icon from 'react-native-vector-icons/Entypo';
 import DrawerContent from './DrawerContent';
+import SplashScreen from 'react-native-splash-screen';
+import {useEffect} from 'react';
+import LoginPage from './Screens/Login&Register/Login';
+import RegisterPage from './Screens/Login&Register/Register';
 
 const StackNav = () => {
   const Stack = createNativeStackNavigator();
@@ -24,20 +28,23 @@ const StackNav = () => {
         },
         headerTintColor: '#fff',
         headerTitleAlign: 'center',
-        
       }}>
-      <Stack.Screen name="Home" component={HomeScreen} options={{
-        headerLeft: () => {
-          return (
-            <Icon
-              name="menu"
-              onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
-              size={30}
-              color="#fff"
-            />
-          );
-        },
-      }}/>
+      <Stack.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{
+          headerLeft: () => {
+            return (
+              <Icon
+                name="menu"
+                onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
+                size={30}
+                color="#fff"
+              />
+            );
+          },
+        }}
+      />
       <Stack.Screen name="Profile" component={ProfileScreen} />
       <Stack.Screen
         name="User"
@@ -54,7 +61,7 @@ const DrawerNav = () => {
   const Drawer = createDrawerNavigator();
   return (
     <Drawer.Navigator
-    drawerContent={props => <DrawerContent {...props}/>}
+      drawerContent={props => <DrawerContent {...props} />}
       screenOptions={{
         headerShown: false,
       }}>
@@ -63,9 +70,22 @@ const DrawerNav = () => {
   );
 };
 function App() {
+  useEffect(() => {
+    setTimeout(() => {
+      SplashScreen.hide();
+    }, 900);
+  }, []);
+  const Stack = createNativeStackNavigator();
+
   return (
     <NavigationContainer>
-      <DrawerNav />
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: false,
+        }}>
+        <Stack.Screen name="Login" component={LoginPage} />
+        <Stack.Screen name="Register" component={RegisterPage} />
+      </Stack.Navigator>
     </NavigationContainer>
   );
 }

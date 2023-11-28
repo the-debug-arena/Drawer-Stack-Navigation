@@ -4,14 +4,14 @@ function HomeScreen(props) {
   console.log(props);
   return (
     <View style={styles.viewStyle}>
-      <Text style={styles.headingStyle}>React Navigation</Text>
-      <Text style={styles.textStyle}>This is Home Screen</Text>
-      <Button
+      <Text style={styles.headingStyle}>Login & Register In React Native</Text>
+      {/* <Text style={styles.textStyle}>This is Home Screen</Text> */}
+      {/* <Button
         title="Profile"
         onPress={() => props.navigation.navigate('Profile',{
           name:"Aadarsh"
         })}
-      />
+      /> */}
     </View>
   );
 }
